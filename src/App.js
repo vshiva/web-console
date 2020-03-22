@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import "./App.sass";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-function App() {
+import { TopNav, LeftNav } from "./components";
+import { Home, Clusters, Streams, OnCall } from "./pages";
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <TopNav />
+      <div className="container">
+        <div className="columns">
+          <div className="column is-3 ">
+            <LeftNav />
+          </div>
+          <div className="column is-9">
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/streams">
+                <Streams />
+              </Route>
+              <Route path="/clusters">
+                <Clusters />
+              </Route>
+              <Route path="/oncall">
+                <OnCall />
+              </Route>
+            </Switch>
+          </div>
+        </div>
+      </div>
+    </Router>
   );
 }
-
-export default App;
